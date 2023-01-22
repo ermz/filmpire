@@ -4,9 +4,11 @@ const Movies = () => {
   console.log('Movies');
 
   return (
-    <div>
-      Movies
-    </div>
+    <>
+      <div>
+        Movies
+      </div>
+    </>
   );
 };
 
