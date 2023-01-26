@@ -14,8 +14,12 @@ export const tmdbApi = createApi({
 
     //* Get Movies by [Type]
     getMovies: builder.query({
-      query: ({ genreIdOrCategoryName, page }) => {
-        console.log(`${genreIdOrCategoryName} ${page} testing TMDB.js`);
+      query: ({ genreIdOrCategoryName, page, searchQuery }) => {
+        //* Get Movies by Search
+        if (searchQuery) {
+          return `/search/movie?query=${searchQuery}&page=${page}&api_key=${tmdbApiKey}`;
+        }
+
         //* Get Movies by Category
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
           return `movie/${genreIdOrCategoryName}?pages=${page}&api_key=${tmdbApiKey}`;
@@ -23,7 +27,7 @@ export const tmdbApi = createApi({
 
         //* Get Movies by Genre
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
-          return `discover/movie?with_genres=${genreIdOrCategoryName}?pages=${page}&api_key=${tmdbApiKey}`;
+          return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${tmdbApiKey}`;
         }
 
         //* Get Popular Movies
