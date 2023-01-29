@@ -8,14 +8,28 @@ import makeStyles from './styles';
 
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
-import { useGetMovieQuery } from '../../services/TMDB';
+import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
+import { MovieList } from '..';
 
 const MovieInformation = () => {
   const dispatch = useDispatch();
   const classes = makeStyles();
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
+
+  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
+
+  const isMovieFavorited = true;
+  const isMovieWatchlisted = true;
+
+  const addToFavorites = () => {
+
+  };
+
+  const addToWatchlist = () => {
+
+  };
 
   if (isFetching) {
     return (
@@ -99,11 +113,35 @@ const MovieInformation = () => {
               <ButtonGroup size="small" variant="outlined">
                 <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>Website</Button>
                 <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`} endIcon={<MovieIcon />}>IMDB</Button>
+                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>Trailer</Button>
+              </ButtonGroup>
+            </Grid>
+            <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
+              <ButtonGroup size="medium" variant="outlined">
+                <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
+                  {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
+                </Button>
+                <Button onClick={addToWatchlist} endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}>
+                  Watchlist
+                </Button>
+                <Button endIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
+                  <Typography style={{ textDecoration: 'none' }} component={Link} to="/" color="inherit" variant="subtitle2">
+                    Back
+                  </Typography>
+                </Button>
               </ButtonGroup>
             </Grid>
           </div>
         </Grid>
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Typography variant="h3" gutterBottom align="center">
+          You might also like
+        </Typography>
+        {recommendations
+          ? <MovieList movies={recommendations} numberOfMovies={12} />
+          : <Box>Sorry nothing was found.</Box>}
+      </Box>
     </Grid>
   );
 };
