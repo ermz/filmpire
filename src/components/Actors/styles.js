@@ -31,4 +31,7 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-around',
     flexWrap: 'wrap',
   },
+  imdbButton: {
+    // backgroundColor: '#4CAF50',
+  },
 }));

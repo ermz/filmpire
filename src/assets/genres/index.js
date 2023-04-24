@@ -19,7 +19,7 @@ import war from './war.png';
 import western from './western.png';
 
 import popular from './popular.png';
-import topRated from './toprated.png';
+import topRated from './top rated.png';
 import upcoming from './upcoming.png';
 
 export default {

@@ -1,20 +1,19 @@
 import React from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import { Grid, Box, CircularProgress, Button } from '@mui/material';
+import { Grid, Box, CircularProgress, Button, Typography } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
-import { Typography } from '@material-ui/core';
-import { useGetActorQuery } from '../../services/TMDB';
+import { useGetActorQuery, useGetActorMoviesQuery } from '../../services/TMDB';
 
 import makeStyles from './styles';
+import { MovieList } from '..';
 
 const Actors = () => {
   const history = useHistory();
   const { id } = useParams();
   const classes = makeStyles();
   const { data, isFetching, error } = useGetActorQuery(id);
-  console.log('hello');
-  console.log(data);
-  console.log('bye');
+
+  // const { data: actorMovies, isFetching: isActorMoviesFetching } = useGetActorMoviesQuery(id);
 
   if (isFetching) {
     return (
@@ -54,14 +53,14 @@ const Actors = () => {
         <Typography variant="h2" align="left" gutterBottom>
           {data?.name}
         </Typography>
-        <Typography variant="h5" align="left">
+        <Typography variant="h5" align="left" gutterBottom>
           Born: {readableDate(data?.birthday.toString())}
         </Typography>
-        <Typography>
+        <Typography variant="body2">
           {data?.biography}
         </Typography>
         <Grid item style={{ marginTop: '2rem' }} className={classes.buttonContainer}>
-          <Button target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/name/${data?.imdb_id}`}>
+          <Button target="_blank" rel="noopener noreferrer" className={classes.imdbButton} href={`https://www.imdb.com/name/${data?.imdb_id}`}>
             <Typography>
               IMDB
             </Typography>
@@ -74,9 +73,12 @@ const Actors = () => {
         </Grid>
       </Grid>
       <Box marginTop="5rem" width="100%">
-        <Typography variant="h3" gutterBottom align="center">
+        {/* <Typography variant="h3" gutterBottom align="center">
           Movies
         </Typography>
+        {actorMovies
+          ? <MovieList movies={actorMovies} numberOfMovies={6} />
+          : <Box>Sorry nothing was found.</Box>} */}
       </Box>
     </Grid>
   );
