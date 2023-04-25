@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, useMediaQuery, Rating } from '@mui/material';
+import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, Rating } from '@mui/material';
 import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBorderOutlined, Remove, ArrowBack } from '@mui/icons-material';
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+
 import makeStyles from './styles';
 
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 import { useGetMovieQuery, useGetRecommendationsQuery } from '../../services/TMDB';
 import genreIcons from '../../assets/genres';
+// eslint-disable-next-line import/no-cycle
 import { MovieList } from '..';
 
 const MovieInformation = () => {
@@ -19,7 +20,7 @@ const MovieInformation = () => {
   const { data, isFetching, error } = useGetMovieQuery(id);
   const [open, setOpen] = useState(false);
 
-  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
+  const { data: recommendations } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: id });
 
   const isMovieFavorited = true;
   const isMovieWatchlisted = true;
@@ -76,7 +77,7 @@ const MovieInformation = () => {
           </Typography>
         </Grid>
         <Grid item className={classes.genresContainer}>
-          {data?.genres?.map((genre, i) => (
+          {data?.genres?.map((genre) => (
             <Link
               key={genre.name}
               className={classes.links}

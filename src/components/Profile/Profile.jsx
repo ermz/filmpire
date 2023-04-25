@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Typography, Button, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { ExitToApp } from '@mui/icons-material';
@@ -7,7 +7,7 @@ import { userSelector } from '../../features/auth';
 
 const Profile = () => {
   const { user } = useSelector(userSelector);
-  console.log('Profile');
+  console.log(user);
   const favoriteMovies = [];
 
   const logout = () => {

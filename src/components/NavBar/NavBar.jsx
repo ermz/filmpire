@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setUser, userSelector } from '../../features/auth';
+// eslint-disable-next-line import/no-cycle
 import { Sidebar, Search } from '..';
 import { fetchToken, createSessionId, moviesApi } from '../../utils';
 import useStyles from './styles';
@@ -17,8 +18,6 @@ const NavBar = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
   const dispatch = useDispatch();
-
-  console.log(user);
 
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');

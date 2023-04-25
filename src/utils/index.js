@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios';
 
 export const moviesApi = axios.create({
@@ -34,7 +35,8 @@ export const createSessionId = async () => {
       localStorage.setItem('session_id', session_id);
       return session_id;
     } catch (error) {
-      console.log(error);
+      return console.log(error);
     }
   }
+  return token;
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { collapseClasses, CssBaseline } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { Route, Switch } from 'react-router-dom';
 
 import useStyles from './styles';

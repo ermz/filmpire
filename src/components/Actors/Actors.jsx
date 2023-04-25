@@ -2,10 +2,9 @@ import React from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { Grid, Box, CircularProgress, Button, Typography } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
-import { useGetActorQuery, useGetActorMoviesQuery } from '../../services/TMDB';
+import { useGetActorQuery } from '../../services/TMDB';
 
 import makeStyles from './styles';
-import { MovieList } from '..';
 
 const Actors = () => {
   const history = useHistory();
