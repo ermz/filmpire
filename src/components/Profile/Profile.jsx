@@ -6,8 +6,8 @@ import { ExitToApp } from '@mui/icons-material';
 import { userSelector } from '../../features/auth';
 
 const Profile = () => {
+  // eslint-disable-next-line no-unused-vars
   const { user } = useSelector(userSelector);
-  console.log(user);
   const favoriteMovies = [];
 
   const logout = () => {
