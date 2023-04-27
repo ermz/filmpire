@@ -13,7 +13,7 @@ This is a movie search website that allows users to search for movies by title, 
 - Save favorite movies to a personal watchlist
 - Authentication provided through TMDB
 
-**Technologies Used**
+### Technologies Used
 - HTML
 - CSS
 - MUI
@@ -23,7 +23,7 @@ This is a movie search website that allows users to search for movies by title, 
 - themoviedb api
 - authentication through themoviedb
 
-**Installation**
+### Installation
 To run locally:
 1. Clone this project locally
 2. Run `npm install` in your command line
